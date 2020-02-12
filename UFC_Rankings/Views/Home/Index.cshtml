@@ -1,0 +1,67 @@
+﻿@model List<UFC_Rankings.Models.Ranking>
+
+<head>
+    <title>UFC Standings</title>
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.css">
+    <style>
+        .bg-primary{
+            background-color: #191919 !important;
+        }
+        #standings_div{
+            margin: 100px 0 0;
+        }
+        .weight_class_div{
+            text-align: center;
+        }
+        body{
+            background-color: #282828;
+        }
+        .card-header {
+            font-size: 24px;
+            text-align: center;
+        }
+        #outer_standings_div{
+            margin: 45px auto;
+        }
+        .row{
+            padding: 40px 0;
+        }
+        .card:hover {
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,.2);
+        }
+        a {
+            color: #ffffff;
+        }
+        a:hover {
+            color: #fdd2d2;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer_standings_div">
+        <div class="container">
+            <div class="row">
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    <div class="col-md-12 col-lg-6 col-xs-12 col-xl-4">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h4>@Model[i].name</h4>
+                            </div>
+                            <img class="card_image" style="width: 100%; display: block;" src="/Images/@i ..jpg" alt="Card image" title="">
+                            <div class="card-body">
+                                @for (int a = 0; a < Model[i].competitor_rankings.Count(); a++)
+                                {
+                                    if(a < 15)
+                                    {
+                                        <a href="https://www.ufc.com/athlete/@Model[i].competitor_rankings[a].competitor.name-@Model[i].competitor_rankings[a].competitor.lname"><h5>@Model[i].competitor_rankings[a].competitor.name @Model[i].competitor_rankings[a].competitor.lname</h5></a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
